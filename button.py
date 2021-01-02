@@ -61,4 +61,4 @@ class Button():
         text_img = font.render(self.text, True, self.text_col)
         text_len = text_img.get_width()
         screen.blit(text_img, (self.x + int(self.width / 2) - int(text_len / 2)), self.y + 5 )
-    
+        return action

@@ -44,12 +44,12 @@ class Game():
 
     def printBoard(self):
         print(str(self.board))
-        print(f"\n Point: \033[31mHuman: {self.players['human'].getPoint()}\033[34m  Ai: {self.players['ai'].getPoint()}\033[0m")
-
+        # print(f"\n Point: \033[31mHuman: {self.players['human'].getPoint()}\033[34m  Ai: {self.players['ai'].getPoint()}\033[0m")
+        print(f"{self.players['human']} {self.players['ai']}")
     def applyMove(self, move, player):
         self.currentTurn = 1 - self.currentTurn
         new_point = self.board.applyMove(move)
-        if player.isHumanPlayer():
+        if player.isRedSide():
             player.updatePoint(new_point) 
         else:
             player.updatePoint(-new_point)

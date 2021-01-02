@@ -5,10 +5,18 @@ import copy
 import time
 
 class Player():
+    red = "\033[31m"
+    blue = "\033[34m"
     MAX_STEPS = MAX.STEPS
     """Simulate one of the participants playing the game."""
-    def __init__(self):
+    def __init__(self, redSide):
         self.point = 0
+        self.redSide = redSide
+        if self.redSide:
+            self.color = self.red
+        else:
+            self.color = self.blue
+
     def updatePoint(self,new_point):
         self.point += new_point
 
@@ -21,22 +29,36 @@ class Player():
     def getPoint(self):
         return self.point
     
+    def __str__(self):
+        string = ""
+        if self.isRedSide():
+            string += "\033[31m"#Human: {self.players['human'].getPoint()}\033["
+        else:
+            string += "\033[34m"
+        if self.isHumanPlayer():
+            string += "Human: "
+        else:
+            string += "AI: "
+
+        string += f"{self.getPoint()} \033[0m"
+
+        return string
+
+        
 
 
 
 class HumanPlayer(Player):
     def __init__(self, redSide):  # redSide play first
-        super().__init__()
-        self.redSide = redSide
+        super().__init__(redSide)
         self.humanPlayer = True
 
 
 class AIPlayer(Player):
     def __init__(self, redSide):  # redSide play first
-        super().__init__()
-        self.redSide = redSide
+        super().__init__(redSide)
         self.humanPlayer = False
-
+        
     def getMoves(self, board):
         possibleMoves = []
 

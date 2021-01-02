@@ -45,22 +45,22 @@ class GameController():
             self.game.applyMove(user_move, self.human)
             self.game.printBoard()
         else:
-            computer_move = self.ai.makeMove(self.game.getBoard())
+            computer_move = self.ai.makeMove(self.game.getBoard(), True)
             # print(f"Thoi gian: {time.time() - start}")
             self.game.applyMove(computer_move, self.ai)
-            print(f"AI choose \033[34m{str(computer_move)}\033[0m")
+            print(f"AI choose \033[31m{str(computer_move)}\033[0m")
             self.game.printBoard()
 
     def notRedSideMove(self):
         if not self.redSide.isHumanPlayer():
-            user_move = input("\n Make a move: \033[31m")
+            user_move = input("\n Make a move: \033[34m")
             print("\033[0m")
             while user_move not in self.game.getMoves():
                 user_move = input("Please enter a valid move: ")
             self.game.applyMove(user_move, self.human)
             self.game.printBoard()
         else:
-            computer_move = self.ai.makeMove(self.game.getBoard())
+            computer_move = self.ai.makeMove(self.game.getBoard(), False)
             # print(f"Thoi gian: {time.time() - start}")
             self.game.applyMove(computer_move, self.ai)
             print(f"AI choose \033[34m{str(computer_move)}\033[0m")
