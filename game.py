@@ -3,14 +3,14 @@ from max import MAX
 import copy
 
 
-class Game():
+class Game:
     """Visualize the board and control the flow of the game."""
     MAX_STEPS = MAX.STEPS
     SIZE = MAX.SIZE
-    turn = ["human",'ai']
-    def __init__(self, human, ai):
+    turn = ['p1','p2']
+    def __init__(self, p1, p2):
         self.board = Board(self.SIZE)
-        self.players = {"human": human, "ai": ai}
+        self.players = {'p1': p1, "p2": p2}
         self.currentTurn = 0
         self.board.buildBoard()
 
@@ -31,10 +31,10 @@ class Game():
     def getSteps(self):
         return self.board.getSteps()
     def getStatus(self):
-        if self.players["human"].getPoint() > self.players["ai"].getPoint():
-            self.status = "You Win !!!"
-        elif self.players["human"].getPoint() < self.players["ai"].getPoint():
-            self.status = "You Lost !!!"
+        if self.players['p1'].getPoint() > self.players['p2'].getPoint():
+            self.status = f"{self.players['p1'].name} Win !!!"
+        elif self.players['p1'].getPoint() < self.players['p2'].getPoint():
+            self.status = f"{self.players['p2'].name} Win !!!"
         else:
             self.status = "It's a tie !!!"
         return self.status
@@ -45,7 +45,7 @@ class Game():
     def printBoard(self):
         print(str(self.board))
         # print(f"\n Point: \033[31mHuman: {self.players['human'].getPoint()}\033[34m  Ai: {self.players['ai'].getPoint()}\033[0m")
-        print(f"{self.players['human']} {self.players['ai']}")
+        print(f"{self.players['p1']} {self.players['p2']}")
     def applyMove(self, move, player):
         self.currentTurn = 1 - self.currentTurn
         new_point = self.board.applyMove(move)

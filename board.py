@@ -18,17 +18,26 @@ class Board():
 
     def buildBoard(self):
         """Build a board consisting of size x size spots in a grid."""
-        for i in range(self.size):
-            for j in range(self.size):
-                self.board[i, j] = random.randint(-self.MAX_VALUE, self.MAX_VALUE)
-        # DULIEUMAU = [[1,-6,7,-7,8,18],
-        #     [-8,2,-4,-9,16,9],
-        #     [14,-11,3,-10,-5,13],
-        #     [10,17,-12,4,-1,-13],
-        #     [-15,15,-2,-3,5,-14],
-        #     [11,-16,12,-17,-18,6]]
+        size = self.size
+        size_ = size ** 2
+        list_ = []
+        s = 0
+        while size_ > 1:
+            if s >= 0:
+                tmp = random.randint(-9, 0)
+            if s < 0:
+                tmp = random.randint(0, 9)
+            list_.append(tmp)
+            s += tmp
+            size_ -= 1
+        list_.append(-s)
+        self.board = np.full((size, size), 0)
+        for i in range(size):
+            for j in range(size):
+                tmp = random.choice(list_)
+                self.board[i, j] = tmp
+                list_.remove(tmp)
 
-        # self.board = np.array(DULIEUMAU)
         self.original_board = np.copy(self.board)
 
     def __str__(self):

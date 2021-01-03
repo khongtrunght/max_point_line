@@ -1,4 +1,5 @@
 class MAX():
-    STEPS = 4
-    SIZE = 6
+    STEPS = 6
+    SIZE = 8
     VALUE = 9
+    SEARCH_LIMIT = 4
